@@ -1,5 +1,9 @@
 const state = {
-  state: 'filling',
-  error: null,
+  rssForm: {
+    state: "filling",
+    error: null,
+    valid: true
+  },
+  urlsRcc: [],
 };
 export default state;

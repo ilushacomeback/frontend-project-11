@@ -3,5 +3,4 @@ export default (error) => {
   const feedback = document.querySelector('.feedback');
   input.classList.add('is-invalid');
   feedback.textContent = error;
-  input.value = '';
 };
