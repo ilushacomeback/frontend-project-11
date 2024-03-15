@@ -5,5 +5,9 @@ const state = {
     valid: true
   },
   urlsRcc: [],
+  uiState: {
+    feeds: [],
+    posts: []
+  }
 };
 export default state;
