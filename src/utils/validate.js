@@ -1,13 +1,22 @@
 import * as yup from "yup";
-import state from "../app";
+import i18n from './translate/index.js'
 
-const validate = (inputValue) => {
+const validate = (inputValue, state) => {
+  const i18 = i18n()
+  yup.setLocale({
+    mixed: {
+      notOneOf: i18.t('notUniqueUrl')
+    },
+    string: {
+      url: i18.t('inCorrectUrl')
+    }
+  })
   const schema = yup.object().shape({
     inputValue: yup
       .string()
-      .url("Ссылка должна быть валидным URL")
+      .url()
       .required()
-      .notOneOf(state.urlsRcc, "RSS уже существует"),
+      .notOneOf(state.urlsRcc),
   });
   return schema.validate(inputValue);
 };

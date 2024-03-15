@@ -5,7 +5,7 @@ const form = document.querySelector(".rss-form");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const { value } = form.elements.input;
-  validate({ inputValue: value })
+  validate({ inputValue: value }, watchedState)
     .then(() => {
       watchedState.urlsRcc.push(value);
       watchedState.rssForm.state = "sending";
