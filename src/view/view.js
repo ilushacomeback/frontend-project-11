@@ -5,9 +5,9 @@ import renderFeeds from "./renderFeeds.js";
 import renderPosts from "./renderPosts.js";
 
 const watchedState = onChange(state, (path, value) => {
-  if (path === "rssForm.error") {
+  if (path === "rssForm.error" && value) {
     renderErrors(value);
-  } else if (value === "sending") {
+  } else if (value === "success") {
     const input = document.querySelector("#url-input");
     const feedback = document.querySelector(".feedback");
     input.classList.remove("is-invalid");
