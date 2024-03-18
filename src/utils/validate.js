@@ -1,16 +1,15 @@
-import * as yup from "yup";
-import i18n from './translate/index.js'
+import * as yup from 'yup';
+import i18n from './translate/index.js';
 
 const validate = (inputValue, state) => {
-  const i18 = i18n()
   yup.setLocale({
     mixed: {
-      notOneOf: i18.t('notUniqueUrl')
+      notOneOf: i18n.t('notUniqueUrl'),
     },
     string: {
-      url: i18.t('inCorrectUrl')
-    }
-  })
+      url: i18n.t('inCorrectUrl'),
+    },
+  });
   const schema = yup.object().shape({
     inputValue: yup
       .string()

@@ -1,13 +1,14 @@
 const state = {
   rssForm: {
-    state: "filling",
+    state: 'filling',
     error: null,
-    valid: true
+    valid: true,
   },
   urlsRcc: [],
   uiState: {
     feeds: [],
-    posts: []
-  }
+    posts: [],
+    modalId: null,
+  },
 };
 export default state;

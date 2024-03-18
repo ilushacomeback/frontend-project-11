@@ -1,25 +1,35 @@
-import onChange from "on-change";
-import state from "../app";
-import renderErrors from "./renderErrors.js";
-import renderFeeds from "./renderFeeds.js";
-import renderPosts from "./renderPosts.js";
+import onChange from 'on-change';
+import state from '../app';
+import renderErrors from './renderErrors.js';
+import renderFeeds from './renderFeeds.js';
+import renderPosts from './renderPosts.js';
+import renderModal from './renderModal.js';
 
 const watchedState = onChange(state, (path, value) => {
-  if (path === "rssForm.error" && value) {
-    renderErrors(value);
-  } else if (value === "success") {
-    const input = document.querySelector("#url-input");
-    const feedback = document.querySelector(".feedback");
-    input.classList.remove("is-invalid");
-    input.value = "";
-    feedback.textContent = "";
+  const button = document.querySelector('button[type=submit]');
+  const input = document.querySelector('#url-input');
+  if (path === 'uiState.modalId') {
+    renderModal(state);
+  }
+  if (value !== 'sending') {
+    button.disabled = false;
+    input.disabled = false;
+  }
+  if (value === 'sending') {
+    const feedback = document.querySelector('.feedback');
+    button.setAttribute('disabled', true);
+    input.setAttribute('disabled', true);
+    input.classList.remove('is-invalid');
+    feedback.textContent = '';
+  }
+  if (value === 'invalid') {
+    renderErrors(state);
+  }
+  if (value === 'success') {
+    input.value = '';
     input.focus();
-  }
-  if (path === "uiState.feeds") {
-    renderFeeds(value);
-  }
-  if (path === 'uiState.posts') {
-    renderPosts(value)
+    renderFeeds(state);
+    renderPosts(state);
   }
 });
 export default watchedState;
