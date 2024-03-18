@@ -15,7 +15,7 @@ form.addEventListener('submit', (e) => {
       axios.get(`https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(value)}`)
         .then((response) => {
           const content = response.data.contents;
-          const [feeds, posts] = parserRcc(content);
+          const [feeds, posts] = parserRcc(content, value);
           watchedState.urlsRcc.push(value);
           watchedState.uiState.feeds.push(feeds);
           const reversedPosts = posts.reverse();
