@@ -3,6 +3,7 @@ import validate from '../utils/validate.js';
 import watchedState from '../view/view.js';
 import parserRcc from '../utils/parserRss.js';
 import i18n from '../utils/translate/index.js';
+import _ from 'lodash'
 
 const form = document.querySelector('.rss-form');
 form.addEventListener('submit', (e) => {
@@ -16,14 +17,20 @@ form.addEventListener('submit', (e) => {
         .then((response) => {
           const content = response.data.contents;
           const [feeds, posts] = parserRcc(content, value);
+
+          const id = _.uniqueId()
+          feeds.id = id
+          posts.forEach((post) => post.idFeed = feeds.id)
+
           watchedState.urlsRcc.push(value);
           watchedState.uiState.feeds.push(feeds);
           const reversedPosts = posts.reverse();
           watchedState.uiState.posts.push(...reversedPosts);
+          watchedState.rssForm.valid = true
           watchedState.rssForm.state = 'success';
         })
         .catch((e) => {
-          watchedState.rssForm.error = e.name === 'TypeError' ? i18n.t('invalidRss') : i18n.t(e.message);
+          watchedState.rssForm.error = i18n.t(e.message);
           watchedState.rssForm.state = 'invalid';
         });
     })

@@ -1,17 +1,17 @@
 import renderContainerList from './renderContainerList.js';
 import watchedState from './view.js';
+import _ from 'lodash'
 
-export default (state) => {
+export default (posts) => {
   const containerPosts = document.querySelector('.posts');
-  const { posts } = state.uiState;
   if (!containerPosts.hasChildNodes()) {
     renderContainerList(containerPosts, 'Посты');
   }
 
   const list = containerPosts.querySelector('ul');
-  list.innerHTML = '';
-  posts.forEach((post, index) => {
+  posts.forEach((post) => {
     const { title, link } = post;
+    const index = _.uniqueId()
     post.id = index.toString();
     const li = document.createElement('li');
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');

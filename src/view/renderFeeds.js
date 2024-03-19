@@ -1,15 +1,13 @@
 import renderContainerList from './renderContainerList.js';
 
-export default (state) => {
+export default (feed) => {
   const containerFeeds = document.querySelector('.feeds');
-  const feed = state.uiState.feeds;
   if (!containerFeeds.hasChildNodes()) {
     renderContainerList(containerFeeds, 'Фиды');
   }
 
   const list = containerFeeds.querySelector('ul');
-  list.innerHTML = '';
-  feed.forEach(({ title, description }) => {
+  feed.forEach(({ title, description}) => {
     const li = document.createElement('li');
     li.classList.add('list-group-item', 'border-0', 'border-end-0');
 

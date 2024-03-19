@@ -1,5 +1,9 @@
 export default (content, value) => {
   const parserXml = new DOMParser().parseFromString(content, "application/xml");
+  const error = parserXml.querySelector('parsererror')
+  if (error) {
+    throw new Error('invalidRss')
+  }
   const feed = {
     title: parserXml.querySelector("title").textContent,
     description: parserXml.querySelector("description").textContent,

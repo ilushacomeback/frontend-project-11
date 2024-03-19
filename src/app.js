@@ -2,7 +2,7 @@ const state = {
   rssForm: {
     state: 'filling',
     error: null,
-    valid: true,
+    valid: false,
   },
   urlsRcc: [],
   uiState: {
