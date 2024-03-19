@@ -1,8 +1,7 @@
+import _ from 'lodash';
 import renderContainerList from './renderContainerList.js';
-import watchedState from './view.js';
-import _ from 'lodash'
 
-export default (posts) => {
+export default (posts, watchedState) => {
   const containerPosts = document.querySelector('.posts');
   if (!containerPosts.hasChildNodes()) {
     renderContainerList(containerPosts, 'Посты');
@@ -11,7 +10,7 @@ export default (posts) => {
   const list = containerPosts.querySelector('ul');
   posts.forEach((post) => {
     const { title, link } = post;
-    const index = _.uniqueId()
+    const index = _.uniqueId();
     post.id = index.toString();
     const li = document.createElement('li');
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0');
@@ -39,7 +38,7 @@ export default (posts) => {
 
     button.addEventListener('click', ({ target }) => {
       watchedState.uiState.modalId = target.dataset.id;
-      const visitedLink = target.previousSibling
+      const visitedLink = target.previousSibling;
       visitedLink.classList.remove('fw-bold');
       visitedLink.classList.add('fw-normal', 'link-secondary');
     });

@@ -1,31 +1,27 @@
-import axios from "axios";
-import parserRss from "./parserRss.js";
-import _ from "lodash";
-import watchedState from "../view/view.js";
+import axios from 'axios';
+import _ from 'lodash';
+import parserRss from './parserRss.js';
 
-const updatePosts = (state) => {
-  state.uiState.feeds.forEach(({ link, id }) => {
+const updatePosts = (watchedState) => {
+  watchedState.uiState.feeds.forEach(({ link, id }) => {
     axios
-      .get(
-        `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(
-          link
-        )}`
-      )
+      .get(`https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(link)}`)
       .then((response) => {
         const content = response.data.contents;
         const [, posts] = parserRss(content);
-        const currentPosts = state.uiState.posts.filter(
-          ({ idFeed }) => idFeed === id
+        const currentPosts = watchedState.uiState.posts.filter(
+          ({ idFeed }) => idFeed === id,
         );
-        const newPosts = _.differenceBy(posts, currentPosts, "title");
+        const newPosts = _.differenceBy(posts, currentPosts, 'title');
         if (newPosts.length !== 0) {
-          newPosts.forEach((post) => (post.idFeed = id));
+          console.log(newPosts);
+          newPosts.forEach((post) => post.idFeed = id);
           const reversedPosts = newPosts.reverse();
           watchedState.uiState.posts.push(...reversedPosts);
         }
       })
       .catch(console.log);
   });
-  setTimeout(updatePosts, 5000, state);
+  setTimeout(updatePosts, 5000, watchedState);
 };
 export default updatePosts;

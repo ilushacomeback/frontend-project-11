@@ -8,6 +8,7 @@ const validate = (inputValue, state) => {
     },
     string: {
       url: i18n.t('inCorrectUrl'),
+      required: i18n.t('empty'),
     },
   });
   const schema = yup.object().shape({

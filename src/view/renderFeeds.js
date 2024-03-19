@@ -7,7 +7,7 @@ export default (feed) => {
   }
 
   const list = containerFeeds.querySelector('ul');
-  feed.forEach(({ title, description}) => {
+  feed.forEach(({ title, description }) => {
     const li = document.createElement('li');
     li.classList.add('list-group-item', 'border-0', 'border-end-0');
 

@@ -4,5 +4,6 @@ export default {
     notUniqueUrl: 'RSS уже существует',
     'Network Error': 'Ошибка сети',
     invalidRss: 'Ресурс не содержит валидный RSS',
+    empty: 'Не должно быть пустым',
   },
 };
