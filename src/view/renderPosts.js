@@ -37,8 +37,11 @@ export default (posts) => {
       target.classList.add('fw-normal', 'link-secondary');
     });
 
-    button.addEventListener('click', (e) => {
-      watchedState.uiState.modalId = e.target.dataset.id;
+    button.addEventListener('click', ({ target }) => {
+      watchedState.uiState.modalId = target.dataset.id;
+      const visitedLink = target.previousSibling
+      visitedLink.classList.remove('fw-bold');
+      visitedLink.classList.add('fw-normal', 'link-secondary');
     });
 
     li.append(a, button);
