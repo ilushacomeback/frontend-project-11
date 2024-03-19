@@ -31,7 +31,6 @@ const watchedState = onChange(state, (path, value, oldValue) => {
   }
   if (path === 'uiState.posts') {
     const newPosts = value.slice(oldValue.length);
-    console.log(newPosts);
     renderPosts(newPosts, watchedState);
   }
   if (path === 'uiState.feeds') {
