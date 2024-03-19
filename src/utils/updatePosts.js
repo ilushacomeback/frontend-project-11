@@ -14,7 +14,9 @@ const updatePosts = (watchedState) => {
         );
         const newPosts = _.differenceBy(posts, currentPosts, 'title');
         if (newPosts.length !== 0) {
-          newPosts.forEach((post) => post.idFeed = id);
+          newPosts.forEach((post) => {
+            post.idFeed = id
+          });
           const reversedPosts = newPosts.reverse();
           watchedState.uiState.posts.push(...reversedPosts);
         }

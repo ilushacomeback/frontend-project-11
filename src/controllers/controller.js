@@ -31,8 +31,8 @@ form.addEventListener('submit', (e) => {
           watchedState.rssForm.init = true;
           watchedState.rssForm.state = 'success';
         })
-        .catch((e) => {
-          watchedState.rssForm.error = i18n.t(e.message);
+        .catch((err) => {
+          watchedState.rssForm.error = i18n.t(err.message);
           watchedState.rssForm.state = 'invalid';
         });
     })
